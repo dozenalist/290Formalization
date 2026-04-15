@@ -1,7 +1,16 @@
 # Fdb version 4
-["pdflatex"] 1776207030.72996 "print.tex" "C:/Users/carte/lean/290_Formalization/blueprint/print/print.pdf" "print" 1776207042.26365 2
-  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux" 1776207041 351 a5221065eecc5941fcee3db2977324a0 "pdflatex"
-  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.out" 1776207041 65 35dabbac2647c2ec1c6b2d1c369dff3c "pdflatex"
+["pdflatex"] 1776211850.84384 "print.tex" "C:/Users/carte/lean/290_Formalization/blueprint/print/print.pdf" "print" 1776211852.74157 0
+  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux" 1776211852 1402 02a3a3100153baa967082b6dbc3fef0c "pdflatex"
+  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.out" 1776211852 1229 a1a2816e18a77135de1b1e7d060c0550 "pdflatex"
+  "Ch01.tex" 1776210628 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch02.tex" 1776211283 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch03.tex" 1776211288 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch04.tex" 1776211292 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch05.tex" 1776211298 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch06.tex" 1776211302 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch07.tex" 1776211306 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch08.tex" 1776211310 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Ch09.tex" 1776211315 0 d41d8cd98f00b204e9800998ecf8427e ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1749158670 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1749166932 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1749156498 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -83,10 +92,10 @@
   "c:/texlive/2025/texmf-dist/web2c/texmf.cnf" 1749156342 42148 61becc7c670cd061bb319c643c27fdd4 ""
   "c:/texlive/2025/texmf-var/web2c/xetex/xelatex.fmt" 1749167090 5890108 9fe61e3d9965bab3584e80916f40d468 ""
   "c:/texlive/2025/texmf.cnf" 1749166961 713 e69b156964470283e0530f5060668171 ""
-  "content.tex" 1776207022 381 5f5d51168c8c890ff3cea3d43530289a ""
+  "content.tex" 1776211816 750 233da7a87ccebb25f8b865a539b563d4 ""
   "macros/common.tex" 1776195654 820 60fafcc3aa944a5e60030581a943ef6b ""
   "macros/print.tex" 1776195654 1101 87627b2ec24fef68edc71c13f43f7bab ""
-  "print.tex" 1776195654 1194 b5b52860a99969a5de7fdbc27a0540e2 ""
+  "print.tex" 1776211816 1194 df1fd2ad2de0001756179f9b2339077c ""
   "testfile.tex" 1776205952 428 02cc31a359994417029224fe50038bb8 ""
   (generated)
   "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux"
