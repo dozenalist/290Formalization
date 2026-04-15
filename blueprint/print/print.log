@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.5)  14 APR 2026 18:24
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.5)  14 APR 2026 21:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -939,25 +939,60 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 21.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 21.
-) (./Ch01.tex) (./Ch02.tex) (./Ch03.tex)
-(./Ch04.tex) (./Ch05.tex) (./Ch06.tex) (./Ch07.tex) (./Ch08.tex) (./Ch09.tex))
+)
 
-[1] (C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux)
+[1]
+Chapter 1.
+(./Ch01.tex)
+
+[2
+
+]
+Chapter 2.
+(./Ch02.tex)
+
+[3
+
+]
+Chapter 3.
+(./Ch03.tex)
+
+[4
+
+]
+Chapter 4.
+(./Ch04.tex)
+
+[5
+
+]
+Chapter 5.
+(./Ch05.tex)
+
+[6
+
+]
+Chapter 6.
+(./Ch06.tex) (./Ch07.tex) (./Ch08.tex) (./Ch09.tex))
+
+[7
+
+] (C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
  ***********
 Package rerunfilecheck Info: File `print.out' has not changed.
-(rerunfilecheck)             Checksum: E30F8E29493BD651C88D8FC59368D07E;860.
+(rerunfilecheck)             Checksum: 90F9BB6860C6F892FD95C8C585BBA133;874.
  ) 
 Here is how much of TeX's memory you used:
- 16782 strings out of 468533
- 307360 string characters out of 5451482
- 898630 words of memory out of 5000000
- 44922 multiletter control sequences out of 15000+600000
- 632156 words of font info for 84 fonts, out of 8000000 for 9000
+ 16789 strings out of 468533
+ 307526 string characters out of 5451482
+ 897630 words of memory out of 5000000
+ 44926 multiletter control sequences out of 15000+600000
+ 632180 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,6n,107p,542b,358s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on C:/Users/carte/lean/290_Formalization/blueprint/print/print.p
-df (2 pages).
+df (8 pages).
