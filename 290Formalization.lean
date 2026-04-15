@@ -1,4 +1,3 @@
-import «290Formalization».Basic
 
 import «290Formalization».«Ch01 - Type Theory»
 
