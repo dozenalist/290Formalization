@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1776225748.31378 "print.tex" "C:/Users/carte/lean/290_Formalization/blueprint/print/print.pdf" "print" 1776225752.05659 0
-  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux" 1776225750 1987 7ec0a08af5bbaf7ca4f61781dd525a41 "pdflatex"
-  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.out" 1776225750 841 e8216c17bb4a29310662388654c79cb1 "pdflatex"
+["pdflatex"] 1776822307.96024 "print.tex" "C:/Users/carte/lean/290_Formalization/blueprint/print/print.pdf" "print" 1776822315.67584 0
+  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux" 1776822314 1987 7ec0a08af5bbaf7ca4f61781dd525a41 "pdflatex"
+  "C:/Users/carte/lean/290_Formalization/blueprint/print/print.out" 1776822314 841 e8216c17bb4a29310662388654c79cb1 "pdflatex"
   "Ch01.tex" 1776210628 0 d41d8cd98f00b204e9800998ecf8427e ""
   "Ch02.tex" 1776211283 0 d41d8cd98f00b204e9800998ecf8427e ""
   "Ch03.tex" 1776222397 0 d41d8cd98f00b204e9800998ecf8427e ""
@@ -96,7 +96,7 @@
   "macros/common.tex" 1776195654 820 60fafcc3aa944a5e60030581a943ef6b ""
   "macros/print.tex" 1776195654 1101 87627b2ec24fef68edc71c13f43f7bab ""
   "print.tex" 1776211816 1194 df1fd2ad2de0001756179f9b2339077c ""
-  "testfile.tex" 1776205952 428 02cc31a359994417029224fe50038bb8 ""
+  "testfile.tex" 1776367455 438 23431ebce1ac30a67f48cc9d44548e24 ""
   (generated)
   "C:/Users/carte/lean/290_Formalization/blueprint/print/print.aux"
   "C:/Users/carte/lean/290_Formalization/blueprint/print/print.log"

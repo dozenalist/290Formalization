@@ -3,7 +3,7 @@ import os
 import re
 
 # === Configuration ===
-GITHUB_REPO = "dozenalist/290_Formalization"
+GITHUB_REPO = "dozenalist/290Formalization"
 COMMIT_HASH = "main"  # Use 'main' if preferred
 LEAN_DECLS_PATH = "blueprint/lean_decls"
 LEAN_SOURCE_DIR = "290Formalization"  # Change if your .lean files live elsewhere

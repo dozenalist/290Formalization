@@ -1,3 +1,7 @@
+-- This module serves as the root of the `290Formalization` library.
+-- Import modules here that should be built as part of the library.
+
+
 
 import «290Formalization».«Ch01 - Type Theory»
 

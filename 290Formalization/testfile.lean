@@ -16,3 +16,5 @@ theorem Even_four : Even 4 :=
   .two_mul 2
 
 end test
+
+#check ExistsUnique
