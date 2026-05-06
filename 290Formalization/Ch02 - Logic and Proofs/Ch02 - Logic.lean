@@ -1,4 +1,4 @@
-import «290Formalization».«Ch01 - Type Theory»
+import «290Formalization».«Ch01 - Type Theory».«Ch01 - Type Theory»
 
 
 /-!
@@ -124,6 +124,11 @@ theorem or_comm_tactic : P ∨ Q → Q ∨ P := by
   | inr hQ =>
       left
       exact hQ
+
+theorem or_comm_tactic' : P ∨ Q → Q ∨ P
+  | .inl hP => .inr hP
+  | .inr hQ => .inl hQ
+
 
 theorem or_elim_tactic (h : P ∨ Q) (hPR : P → R) (hQR : Q → R) : R := by
   cases h with
@@ -281,6 +286,11 @@ section ProofTechniques
 
 variable {P Q R : Prop}
 
+
+
+#check Decidable
+#check Classical.propDecidable P
+
 theorem direct_proof (hPQ : P → Q) (hP : P) : Q := by
   exact hPQ hP
 
@@ -364,10 +374,11 @@ theorem dne_implies_em (P : Prop) : ¬¬ (P ∨ ¬ P) := by
 
 
 theorem by_contra {p : Prop} (h : ¬¬ p) : p :=
-  -- match lem p with
-  -- | .inl hp => hp
-  -- | .inr hnp => False.elim (h hnp)
-  (Classical.em p).casesOn id fun hnp => (h hnp).elim
+  match Classical.em p with
+  | .inl hp => hp
+  | .inr hnp => False.elim (h hnp)
+
+  -- (Classical.em p).casesOn id fun hnp => (h hnp).elim
 
 
 

@@ -1,4 +1,4 @@
-import «290Formalization».«Ch03 - Induction»
+import «290Formalization».«Ch03 - Induction».«Ch03 - Induction»
 import Mathlib.Order.Defs.Unbundled
 
 /-!
