@@ -2,13 +2,6 @@
 import Mathlib.Data.Nat.Basic
 import Mathlib.Tactic
 
-/-
-List of exercises we'd like to include:
-6.3
-6.4
-6.5
-6.7
--/
 
 set_option linter.style.emptyLine false
 
