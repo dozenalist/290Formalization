@@ -1,5 +1,23 @@
 # 290 Formalization
 
+### To use this repository on your computer
+
+Do the following:
+
+1. In terminal, go to the directory where you would like this package to live. You do not need to create a new folder yourself, the next command will create a `290Formalization` subfolder for you.
+
+Run `git clone https://github.com/dozenalist/290Formalization.git`
+
+Run `cd 290Formalization`
+
+Run `lake exe cache get` 
+
+Launch VS Code, either through your application menu or by typing `code .`
+
+<br> 
+
+### Introduction
+
 Welcome to "Anyone can Lean."
 The title is a direct reference to Chef Gusteau's book "Anyone can cook"
 from the Pixar film Ratatouille, and its purpose is similar.
@@ -26,7 +44,8 @@ The outline for the first few chapters of the textbook have already been written
 The idea is that we will work as a group to formalize the definitions and exercises in [290].
 Please feel free to ask questions about lean or about the course if you have any -- this is a collaborative effort.
 
-<br><br>
+<br>
+### Leanblueprint
 
 Below is information about the `Leanblueprint` website for this repository, which is not currently set up.
 If people would like to, we could in the future create a website and dependency graph that shows the structure of the theorems in [290]
@@ -43,7 +62,9 @@ In order to configure the website and graph, I run `.\buildall.ps1` in terminal 
 
 I'm pretty sure this command only works in powershell, so you might have to make some other command like it to update changes to the website
 
-<br><br><br>
+<br>
+
+### Chapters
 
 Ch01 - Type Theory 
 
