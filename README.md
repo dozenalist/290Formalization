@@ -14,7 +14,6 @@ Do the following:
 
 5. Launch VS Code, either through your application menu or by typing `code .`
 
-<br> 
 
 ### Introduction
 
@@ -44,7 +43,7 @@ The outline for the first few chapters of the textbook have already been written
 The idea is that we will work as a group to formalize the definitions and exercises in [290].
 Please feel free to ask questions about lean or about the course if you have any -- this is a collaborative effort.
 
-<br>
+
 ### Leanblueprint
 
 Below is information about the `Leanblueprint` website for this repository, which is not currently set up.
@@ -62,7 +61,6 @@ In order to configure the website and graph, I run `.\buildall.ps1` in terminal 
 
 I'm pretty sure this command only works in powershell, so you might have to make some other command like it to update changes to the website
 
-<br>
 
 ### Chapters
 
