@@ -143,12 +143,7 @@ open MvPolynomial in
 
 theorem coeff_pow_eight :
 
-  let powers : Fin 2 →₀ ℕ :=
-    { support := {0, 1}
-      toFun := ![5, 3]
-      mem_support_toFun := by decide }
-
-coeff powers ((2 * X 0 + 3 * X 1) ^ 8) = 48384 := by
+coeff (fun₀ | 0 => 5 | 1 => 3) ((2 * X 0 + 3 * X 1) ^ 8) = 48384 := by
     sorry
 
 

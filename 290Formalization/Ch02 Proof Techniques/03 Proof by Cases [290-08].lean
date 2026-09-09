@@ -90,7 +90,8 @@ theorem same_parity_of_even_add {x y : ℤ}
       · use ky
         linarith
 
-/- Congruence modulo `n`. Lean writes this as `a ≡ b [ZMOD n]`. -/
+/- Congruence modulo `n`. Lean writes this as `a ≡ b [ZMOD n]` for `a b : ℤ`
+and `a ≡ b [MOD n]` for `a b : ℕ`. -/
 
 example : 7 ≡ 3 [ZMOD 2] := by
   rw [Int.modEq_iff_dvd]
