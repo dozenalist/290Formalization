@@ -1,5 +1,36 @@
 # 290 Formalization
 
+Welcome to "Anyone can Lean."
+The title is a direct reference to Chef Gusteau's book "Anyone can cook"
+from the Pixar film Ratatouille, and its purpose is similar.
+It is meant to be a gentle introduction to Lean for curious mathematicians,
+without focusing on the details of type theory or the Lean language.
+
+This book is intended to be a companion to the BYU Math 290 textbook
+"A Transition to Advanced Mathematics" by Doud and Nielsen
+(hereafter referred to as [290]).
+We will follow that textbook very closely and assume that the reader
+is already familiar with the material in it.
+
+We have made some design decisions that necessitate a few departures
+from [290], namely:
+* We have skipped the first six sections of [290], which give a brief
+introduction to logic and set theory. The main purpose of this book is to
+teach readers how to write proofs in Lean. That means that we will
+provide a very brief crash course in type theory (the foundation of Lean)
+and assume that the reader is already familiar with logic.
+
+<br> 
+
+The outline for the first few chapters of the textbook have already been written.
+The idea is that we will work as a group to formalize the definitions and exercises in [290].
+Please feel free to ask questions about lean or about the course if you have any -- this is a collaborative effort.
+
+<br><br>
+
+Below is information about the `Leanblueprint` website for this repository, which is not currently set up.
+If people would like to, we could in the future create a website and dependency graph that shows the structure of the theorems in [290]
+
 [Website](https://dozenalist.github.io/290Formalization/) <br>
 [Dependency Graph](https://dozenalist.github.io/290Formalization/dep_graph_document.html) <br><br>
 
@@ -14,20 +45,20 @@ I'm pretty sure this command only works in powershell, so you might have to make
 
 <br><br><br>
 
-Ch01 - Type Theory
+Ch01 - Type Theory 
 
-Ch02 - Logic and Proofs
+Ch02 - Proof Techniques (Sections 06 - 11)
 
-Ch03 - Induction and Recursion
+Ch03 - Induction and Recursion (Sections 13 - 16)
 
-Ch04 - Relations
+Ch04 - Relations (Sections 20 - 22)
 
-Ch05 - Integers
+Ch05 - Integers (Sections 17, 18, 19, 23)
 
-Ch06 - Functions
+Ch06 - Functions (Sections 25 - 28)
 
-Ch07 - Cardinality
+Ch07 - Cardinality (Sections 29 - 33)
 
-Ch08 - Analysis
+Ch08 - Analysis (Sections 34 - 37)
 
-Ch09 - Algebra
+Ch09 - Algebra 
