@@ -6,13 +6,13 @@ Do the following:
 
 1. In terminal, go to the directory where you would like this package to live. You do not need to create a new folder yourself, the next command will create a `290Formalization` subfolder for you.
 
-Run `git clone https://github.com/dozenalist/290Formalization.git`
+2. Run `git clone https://github.com/dozenalist/290Formalization.git`
 
-Run `cd 290Formalization`
+3. Run `cd 290Formalization`
 
-Run `lake exe cache get` 
+4. Run `lake exe cache get` 
 
-Launch VS Code, either through your application menu or by typing `code .`
+5. Launch VS Code, either through your application menu or by typing `code .`
 
 <br> 
 
