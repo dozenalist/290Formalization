@@ -14,15 +14,12 @@ is already familiar with the material in it.
 
 We have made some design decisions that necessitate a few departures
 from [290], namely:
-* We have skipped the first five sections of [290], which give a brief
+* We have skipped the first six sections of [290], which give a brief
 introduction to logic and set theory. The main purpose of this book is to
 teach readers how to write proofs in Lean. That means that we will
 provide a very brief crash course in type theory (the foundation of Lean)
 and assume that the reader is already familiar with logic.
-* We have moved Sections 10 and 12 on proofs in set theory to a later chapter.
-* We have skipped any examples or exercises that rely heavily on
-visual or geometric intuition. The most obvious example of this is
-the theorem on cutting squares into smaller squares from Section 15.
+* [add more here as needed]
 
 
 -/
