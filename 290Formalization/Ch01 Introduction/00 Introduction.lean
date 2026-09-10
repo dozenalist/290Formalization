@@ -24,5 +24,4 @@ be frustrating.
 * We have ignored examples and exercises that require geometric intuition,
 e.g. the problem in Section 15 about cutting a square into smaller squares.
 
-
 -/

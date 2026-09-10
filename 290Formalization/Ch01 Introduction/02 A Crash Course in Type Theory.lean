@@ -17,10 +17,10 @@ If it isn't, you'll get an error.
 variable {X Y Z : Type}
 
 /-
-The next example does the following: Given a function f : X → Y,
-and a term x of type X, construct a term of type Y.
+The next example does the following: Given a function `f : X → Y`,
+and a term `x` of type `X`, construct a term of type `Y`.
 
-Of course the solution is that f(x) has type Y, so that's what we write.
+Of course the solution is that `f(x)` has type `Y`, so that's what we write.
 Function application is written `f x` instead of `f(x)`
 
 Tactic : `exact`
@@ -187,7 +187,7 @@ def projFirst : X → X → X := by
 def projSecond : X → X → X := by
   sorry
 
--- Prove that P ∧ ¬P implies False
+-- Prove that `P ∧ ¬P` implies False
 example : P → ¬ P → False := by
   sorry
 
