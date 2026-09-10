@@ -1,5 +1,54 @@
 # 290 Formalization
 
+### To use this repository on your computer
+
+Do the following:
+
+1. In terminal, go to the directory where you would like this package to live. You do not need to create a new folder yourself, the next command will create a `290Formalization` subfolder for you.
+
+2. Run `git clone https://github.com/dozenalist/290Formalization.git`
+
+3. Run `cd 290Formalization`
+
+4. Run `lake exe cache get` 
+
+5. Launch VS Code, either through your application menu or by typing `code .`
+
+
+### Introduction
+
+Welcome to "Anyone can Lean."
+The title is a direct reference to Chef Gusteau's book "Anyone can cook"
+from the Pixar film Ratatouille, and its purpose is similar.
+It is meant to be a gentle introduction to Lean for curious mathematicians,
+without focusing on the details of type theory or the Lean language.
+
+This book is intended to be a companion to the BYU Math 290 textbook
+"A Transition to Advanced Mathematics" by Doud and Nielsen
+(hereafter referred to as [290]).
+We will follow that textbook very closely and assume that the reader
+is already familiar with the material in it.
+
+We have made some design decisions that necessitate a few departures
+from [290], namely:
+* We have skipped the first six sections of [290], which give a brief
+introduction to logic and set theory. The main purpose of this book is to
+teach readers how to write proofs in Lean. That means that we will
+provide a very brief crash course in type theory (the foundation of Lean)
+and assume that the reader is already familiar with logic.
+
+<br> 
+
+The outline for the first few chapters of the textbook have already been written.
+The idea is that we will work as a group to formalize the definitions and exercises in [290].
+Please feel free to ask questions about lean or about the course if you have any -- this is a collaborative effort.
+
+
+### Leanblueprint
+
+Below is information about the `Leanblueprint` website for this repository, which is not currently set up.
+If people would like to, we could in the future create a website and dependency graph that shows the structure of the theorems in [290]
+
 [Website](https://dozenalist.github.io/290Formalization/) <br>
 [Dependency Graph](https://dozenalist.github.io/290Formalization/dep_graph_document.html) <br><br>
 
@@ -12,22 +61,23 @@ In order to configure the website and graph, I run `.\buildall.ps1` in terminal 
 
 I'm pretty sure this command only works in powershell, so you might have to make some other command like it to update changes to the website
 
-<br><br><br>
 
-Ch01 - Type Theory
+### Chapters
 
-Ch02 - Logic and Proofs
+Ch01 - Type Theory 
 
-Ch03 - Induction and Recursion
+Ch02 - Proof Techniques (Sections 06 - 11)
 
-Ch04 - Relations
+Ch03 - Induction and Recursion (Sections 13 - 16)
 
-Ch05 - Integers
+Ch04 - Relations (Sections 20 - 22)
 
-Ch06 - Functions
+Ch05 - Integers (Sections 17, 18, 19, 23)
 
-Ch07 - Cardinality
+Ch06 - Functions (Sections 25 - 28)
 
-Ch08 - Analysis
+Ch07 - Cardinality (Sections 29 - 33)
 
-Ch09 - Algebra
+Ch08 - Analysis (Sections 34 - 37)
+
+Ch09 - Algebra 

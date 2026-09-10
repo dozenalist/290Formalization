@@ -262,7 +262,7 @@ as a programming language because it is, in fact, a programming language.
 /-!
 # Explaining Nat
 
-We can split the natural numbers into two collections: the natural umbers that are the
+We can split the natural numbers into two collections: the natural numbers that are the
 successor of another natural number and zero. Thus, constructing the natural numbers as a type
 is tantamount to expressing these two collections as two functions. Since we are defining a
 type, defining these functions is done in the formal sense, much like defining the group

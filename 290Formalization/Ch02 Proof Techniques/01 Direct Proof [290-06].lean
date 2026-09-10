@@ -5,12 +5,16 @@ import Mathlib.Tactic
 
 set_option linter.style.emptyLine false
 
+/-
+This file follows section 6 of the [290] Textbook
+-/
 
-def Nat.even (n : ℕ) : Prop :=
+
+def Int.even (n : ℤ) : Prop :=
   ∃ k, n = 2 * k
 
 
-def Nat.odd (n : ℕ) : Prop :=
+def Int.odd (n : ℤ) : Prop :=
   ∃ k, n = 2 * k + 1
 
 
@@ -20,9 +24,10 @@ If we want to prove an exists statement of the form `∃ k, p(k)`,
 we can write `use k`, and reduce the goal to providing a proof of `p(k)`
 -/
 
-example (k : ℕ) : Nat.even (2 * k + 2) := by
+example (k : ℤ) : Int.even (2 * k + 2) := by
   use k + 1
   rw [mul_add]
+  rfl
 
 /-
 Tactic : `obtain`
@@ -36,10 +41,11 @@ If our existence proof takes the form of an equality, we can use
 rewrtite the secondary hypothesis.
 -/
 
-example (k : ℕ) (hk : Nat.even k) : Nat.even (k + 2) := by
+example (k : ℤ) (hk : Int.even k) : Int.even (k + 2) := by
   obtain ⟨j, rfl⟩ := hk
   use j + 1
   rw [mul_add]
+  rfl
 
 /-
 Tactic : `calc`
@@ -51,7 +57,7 @@ Lean can figure out that the previous right-hand side must be the same as
 the next left-hand side if we put a `_` .
 -/
 
-example (a b : ℕ) : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b := by
+example (a b : ℤ) : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b := by
   calc
 
   (a + b) * (a + b) = a * a + b * a + (a * b + b * b) := by
@@ -71,42 +77,42 @@ Note : you can use `rw [sq]` to rewrite `x ^ 2` as `x * x`
 -/
 
 -- Proposition 6.16
-theorem odd_five_mul_add_three {x : ℕ} (h : Nat.even x) :
-    Nat.odd (5 * x + 3) := by
+theorem odd_five_mul_add_three {x : ℕ} (h : Int.even x) :
+    Int.odd (5 * x + 3) := by
   sorry
 
 -- Proposition 6.18
-theorem even_sq_sub_two_mul_add_three {n : ℕ} (h : Nat.odd n) :
-    Nat.even (n ^ 2 - 2 * n + 3) := by
+theorem even_sq_sub_two_mul_add_three {n : ℕ} (h : Int.odd n) :
+    Int.even (n ^ 2 - 2 * n + 3) := by
   sorry
 
 -- Proposition 6.19
-theorem odd_add_seven {n : ℕ} (h : Nat.even (3 * n)) :
-    Nat.odd (n + 7) := by
+theorem odd_add_seven {n : ℕ} (h : Int.even (3 * n)) :
+    Int.odd (n + 7) := by
   sorry
 
 -- Proposition 6.20
-theorem odd_four_mul_sq_add_one {n : ℕ} (h : Nat.even n) :
-    Nat.odd (4 * n ^ 2 + 1) := by
+theorem odd_four_mul_sq_add_one {n : ℕ} (h : Int.even n) :
+    Int.odd (4 * n ^ 2 + 1) := by
   sorry
 
 
 -- Exercise 6.3
-theorem odd_sq_of_odd {x : ℕ} (h : Nat.odd x) : Nat.odd (x^2) := by
+theorem odd_sq_of_odd {x : ℕ} (h : Int.odd x) : Int.odd (x^2) := by
   sorry
 
 -- Exercise 6.4
-theorem odd_seven_mul_add_five {x : ℕ} (h : Nat.even x) :
-    Nat.odd (7 * x + 5) := by
+theorem odd_seven_mul_add_five {x : ℤ} (h : Int.even x) :
+    Int.odd (7 * x + 5) := by
   sorry
 
 -- Exercise 6.5
-theorem even_mul_add_mul {a b c : ℕ} (ha : Nat.odd a) (hc : Nat.odd c) :
-    Nat.even (a * b + b * c) := by
+theorem even_mul_add_mul {a b c : ℤ} (ha : Int.odd a) (hc : Int.odd c) :
+    Int.even (a * b + b * c) := by
   sorry
 
 -- Exercise 6.7
 -- Note : `∃ a b ,` is short for `∃ a, ∃ b,`
-theorem exists_sq_sub_of_odd {x : ℕ} (h : Nat.odd x) :
+theorem exists_sq_sub_of_odd {x : ℤ} (h : Int.odd x) :
     ∃ a b : ℕ, x = a ^ 2 - b ^ 2 := by
   sorry

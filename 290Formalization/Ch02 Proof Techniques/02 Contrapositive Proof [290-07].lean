@@ -8,10 +8,6 @@ set_option linter.style.emptyLine false
 
 -- The contrapositive equivalence.
 
-/-
-Tactic : exfalso
-explain
--/
 
 open Classical in
 theorem imp_iff_contrapositive (P Q : Prop) : (P → Q) ↔ (¬Q → ¬P) := by

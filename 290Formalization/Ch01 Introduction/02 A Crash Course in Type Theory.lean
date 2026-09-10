@@ -27,7 +27,7 @@ set_option autoImplicit false
 
 universe u v w u'
 
-namespace TypeTheoryCrashCourse -- we should come up with one namespace to put everything under
+namespace LeMa
 
 /-!
 ## 1. Types, terms, and propositions
@@ -247,23 +247,23 @@ These are good next statements to try filling in by hand.
 
 -/
 
--- variable {X : Type} {P Q R : Prop}
+variable {X : Type} {P Q R : Prop}
 
--- theorem imp_self : P → P := by
---   sorry
+theorem imp_self : P → P := by
+  sorry
 
--- theorem imp_chain : (P → Q) → (Q → R) → P → R := by
---   sorry
+theorem imp_chain : (P → Q) → (Q → R) → P → R := by
+  sorry
 
--- theorem imp_permute : (P → Q → R) → Q → P → R := by
---   sorry
+theorem imp_permute : (P → Q → R) → Q → P → R := by
+  sorry
 
--- theorem pointwise_comp
---     {P Q R : X → Prop}
---     (hPQ : ∀ x, P x → Q x) (hQR : ∀ x, Q x → R x) :
---     ∀ x, P x → R x := by
---   sorry
+theorem pointwise_comp
+    {P Q R : X → Prop}
+    (hPQ : ∀ x, P x → Q x) (hQR : ∀ x, Q x → R x) :
+    ∀ x, P x → R x := by
+  sorry
 
 
 
-end TypeTheoryCrashCourse
+end LeMa

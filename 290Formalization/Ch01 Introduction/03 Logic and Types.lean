@@ -4,7 +4,7 @@ import Mathlib.Tactic
 /-!
 # Logic in Lean
 
-This file is a follow-up to `Types.lean`. The main theme is that the logical
+This file is a follow-up to `A Crash Course in Type Theory`. The main theme is that the logical
 connectives are themselves types:
 
 * `P → Q` is the type of functions from proofs of `P` to proofs of `Q`;
@@ -379,7 +379,7 @@ theorem by_contra {p : Prop} (h : ¬¬ p) : p :=
   | .inl hp => hp
   | .inr hnp => False.elim (h hnp)
 
-  -- (Classical.em p).casesOn id fun hnp => (h hnp).elim
+
 
 
 
