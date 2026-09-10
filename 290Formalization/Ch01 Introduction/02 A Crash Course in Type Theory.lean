@@ -1,269 +1,188 @@
 import Mathlib.Tactic
 
-
-
 /-!
 # A crash course in type theory for mathematicians
 
-Lean is built on the principle that propositions and types are handled by the
-same formal language.
+In type theory, there are terms and types. For now, the following
+mental model will work for you (even though it's not quite right):
+* `Type` = `Set`
+* `Term` = `Element`
+* `x : X` means that `x` is a term of type `X`. This acts like `x ∈ X`.
 
-The basic slogan is:
-
-* `x : X` means "`x` is a term of the type `X`".
-* if `P : Prop`, then `h : P` means "`h` is a proof of `P`".
-* a function `f : X → Y` sends terms of `X` to terms of `Y`.
-* an implication `h : P → Q` sends proofs of `P` to proofs of `Q`.
-
-So implication is not merely analogous to a function arrow: in Lean, it is a
-function arrow.
-
-This file is intentionally written as a compact outline. The point is not to
-cover all of type theory, but to isolate the ideas that matter most when you
-first read Lean as a mathematician.
+Lean is essentially just a fancy type checker. If you write
+`thing : type`, Lean can check that `thing` is a term of type `type`.
+If it isn't, you'll get an error.
 -/
 
-set_option autoImplicit false
+variable {X Y Z : Type}
 
-universe u v w u'
+/-
+The next example does the following: Given a function f : X → Y,
+and a term x of type X, construct a term of type Y.
 
-namespace LeMa
-
-/-!
-## 1. Types, terms, and propositions
-
-`Type` is the universe of ordinary mathematical data.
-`Prop` is the universe of propositions.
-
-For a mathematician:
-
-* `Nat`, `Int`, `Set X`, `X → Y` are all types.
-* `x : X` means that `x` is an element of `X`.
-* `P : Prop` means that `P` is a proposition.
-* `h : P` means that `h` is a proof of `P`.
+Of course the solution is that f(x) has type Y, so that's what we write.
+If you can exactly construct the term it's looking for, use the tactic `exact`.
+Function application is written `f x` instead of `f(x)`
 -/
 
-#check Type
-#check Prop
-#check Nat
-#check Nat → Nat
-#check Nat → Prop
-#check Prop → Prop
+example (f : X → Y) (x : X) : Y := by
+  exact f x
 
-/-!
-## 2. Ordinary functions
 
-The basic object of type theory is a function. We start with functions between
-types, and later specialize to functions between propositions.
+/-
+In type theory, propositions are also types. If `P : Prop` then `P` is
+a proposition. It can be helpful to think of `P` as a set whose elements
+are its proofs. If `P` is the empty set, it's `False`. If `P` is nonempty
+(in type theory we say it's "inhabited") then it's `True`.
+So `h : P` means `h` is a proof of `P`.
+
+Implication `P implies Q` is denoted `P → Q`. This looks a lot like a function.
+That's because it is! In type theory, implication is just a function that
+sends proofs of `P` to proofs of `Q`.
 -/
 
-section Functions
+variable {P Q R : Prop}
 
-variable {X : Type u} {Y : Type v} {Z : Type w} {W : Type u'}
+/-
+The next example proves the theorem: If we know `P` implies `Q` and we have a
+proof of `P`, then `Q` is true.
 
-def idFn (x : X) : X := x
-
-
-def compose (g : Y → Z) (f : X → Y) : X → Z :=
-  fun x => g (f x)
-
-def const (y : Y) : X → Y :=
-  fun _ => y
-
-theorem idFn_apply (x : X) : idFn x = x := rfl
-
-theorem compose_apply (g : Y → Z) (f : X → Y) (x : X) :
-    compose g f x = g (f x) := rfl
-
-theorem const_apply (y : Y) (x : X) : const (X := X) y x = y := rfl
-
-theorem compose_eq_comp (g : Y → Z) (f : X → Y) :
-    compose g f = g ∘ f := rfl
-
-theorem comp_apply (g : Y → Z) (f : X → Y) (x : X) :
-    (g ∘ f) x = g (f x) := rfl
-
-theorem id_comp (f : X → Y) : idFn ∘ f = f := by
-  funext x
-  rfl
-
-theorem comp_id (f : X → Y) : f ∘ idFn = f := by
-  funext x
-  rfl
-
-theorem comp_assoc (h : Z → W) (g : Y → Z) (f : X → Y) :
-    (h ∘ g) ∘ f = h ∘ (g ∘ f) := by
-  funext x
-  rfl
-
-/-!
-Two functions are equal when they have the same value at every input.
-This is the principle of function extensionality.
--/
-theorem extensionality (f g : X → Y) (h : ∀ x : X, f x = g x) : f = g :=
-  funext h
-
-/-!
-The type `X → Y → Z` means `X → (Y → Z)`.
-
-So a function of two variables is really a function which, given `x : X`,
-returns a new function `Y → Z`.
--/
-def swapArgs (f : X → Y → Z) : Y → X → Z :=
-  fun y x => f x y
-
-theorem swapArgs_apply (f : X → Y → Z) (x : X) (y : Y) :
-    swapArgs f y x = f x y := rfl
-
-end Functions
-
-/-!
-## 3. Propositions as types
-
-Now let `P`, `Q`, `R` be propositions.
-
-Then:
-
-* a term of `P` is a proof of `P`,
-* a term of `P → Q` is a function taking proofs of `P` to proofs of `Q`.
-
-This is the Curry-Howard viewpoint. In practice, it means:
-
-* to prove `P → Q`, assume `hP : P` and build a term of `Q`;
-* to use `hPQ : P → Q`, apply it to `hP : P`.
+Observe that the statement and proof are identical to the previous example!
 -/
 
-section Implication
+example (h : P → Q) (p : P) : Q := by
+  exact h p
 
-variable {P Q R S : Prop}
 
-theorem imp_id : P → P :=
-  fun hP => hP
+/-
+Functions are primitive in type theory. Thus, much of what we do in Lean
+involves functions.
 
-theorem modusPonens (hPQ : P → Q) (hP : P) : Q :=
-  hPQ hP
+Tactic : `intro`
+When defining a function `f : X → Y`, we might start by saying "given an
+element `x` of `X`, ...". The tactic `intro` introduces an element of `X`.
+Similarly, when proving an implication `P → Q` we might start by saying
+"suppose `P` is true, ...". The tactic `intro` introduces a proof of `P`.
 
-theorem imp_trans (hPQ : P → Q) (hQR : Q → R) : P → R :=
-  fun hP => hQR (hPQ hP)
+Tactic : `apply`
+This very common tactic "works backwards" from the goal. If we want to
+prove `Q` and we have `h : P → Q`, we might say "by `h`, it suffices to
+supply a proof of `P`". The `apply` tactic pulls back along the arrow
+to change the goal from `Q` to `P`.
 
-theorem imp_trans' : (P → Q) → (Q → R) → P → R := by
-  intro hPQ hQR hP
-  exact hQR (hPQ hP)
-
-/-!
-Implication is literally composition of functions.
+Put your cursor on each line of the following definition and proof, and
+see how the tactic state in the sidebar changes as we use each tactic.
 -/
-theorem implication_is_composition (hPQ : P → Q) (hQR : Q → R) :
-    hQR ∘ hPQ = imp_trans hPQ hQR := by
-  funext hP
-  rfl
 
-/-!
-The type `P → Q → R` means `P → (Q → R)`.
+def compose (g : Y → Z) (f : X → Y) : X → Z := by
+  intro x -- "given an element x of X"
+  apply g -- "to create an element of Z, by g it suffices to supply an element of Y"
+  apply f -- "to create an element of Y, by f it suffices to supply an element of X"
+  exact x -- "here's an element of X"
 
-So a proof of `P → Q → R` is a function which takes a proof of `P` and returns
-another function `Q → R`.
+example (h1 : Q → R) (h2 : P → Q) : P → R := by
+  intro p -- "assume P"
+  apply h1 -- "by h2, it suffices to prove Q"
+  apply h2 -- "by h1, it suffices to prove P"
+  exact p -- "here's a proof of P"
+
+/-
+We can shorten the proof above by using actual function composition.
 -/
-theorem imp_intro_two : P → Q → P :=
-  fun hP _hQ => hP
 
-theorem imp_swap : (P → Q → R) → Q → P → R :=
-  fun h hQ hP => h hP hQ
+example (h1 : Q → R) (h2 : P → Q) : P → R := by
+  intro p
+  exact h1 (h2 p)
 
-theorem compose_three_implications
-    (hPQ : P → Q) (hQR : Q → R) (hRS : R → S) : P → S :=
-  fun hP => hRS (hQR (hPQ hP))
+/-
+In Lean, it's common to use "currying" instead of Cartesian products
+or logical And (which are the same thing under the hood).
+Instead of writing `f : X × Y → Z` we would write
+`f : X → Y → Z`. By default, arrows associate to the right, so this
+is the same as `f : X → (Y → Z)`. So `f` takes in an element of `X`
+and returns a function `Y → Z`, i.e. `f x y : Z` if `x : X` and `y : Y`.
+
+This works in logic too. Instead of writing `h : P ∧ Q → R` we
+would write `h : P → Q → R`. The next example shows that we can
+swap `Q` and `R`, as we would expect from the commutativity of And.
+-/
+
+example (h : P → Q → R) : Q → P → R := by
+  intro q p
+  exact h p q
+
+/-
+This next example shows that implication is transitive.
+-/
+
+theorem imp_trans : (P → Q) → (Q → R) → P → R := by
+  intro hPQ hQR p
+  apply hQR
+  apply hPQ
+  exact p
+
+/-
+Wait, that proof is nearly identical to a previous one!
+That's because everything to the left of the colon acts
+like a hypothesis, so
+`(h1 : Q → R) (h2 : P → Q) : P → R`
+is equivalent to
+`(Q → R) → (P → Q) → P → R`
+-/
+
 
 /-!
-Negation is also a function type:
-
-* `¬ P` is notation for `P → False`.
+Negation is also a function type: `¬ P` is notation for `P → False`.
 
 So proving `¬ P` means giving a function that turns any hypothetical proof of
 `P` into a contradiction.
 -/
-#check Not
-#check False
-#check (¬ P)
 
-theorem not_of_imp_false (h : P → False) : ¬ P :=
-  h
+theorem doubleNeg : P → ¬¬ P := by
+  intro p np
+  exact np p
 
-theorem doubleNegIntro : P → ¬¬ P := by
-  intro hP hNotP
-  exact hNotP hP
+theorem contrapositive (h : P → Q) : ¬ Q → ¬ P := by
+  intro nq p
+  apply nq
+  apply h
+  exact p
 
-theorem contrapositive (hPQ : P → Q) : ¬ Q → ¬ P := by
-  intro hNotQ hP
-  exact hNotQ (hPQ hP)
-
-end Implication
-
-/-!
-## 4. Universal quantification as a dependent function type
-
-The expression `∀ x : X, A x` is a dependent function type: the target type
-`A x` is allowed to depend on the input `x`.
-
-This is the natural generalization of an ordinary function type.
-
-For propositions, `∀ x : X, P x` says: given any `x`, we can produce a proof of
-`P x`.
+/-
+The expression `∀ x : X, P x` acts like a function, too.
+If we have `h : ∀ x : X, P x` and some `x : X` then `h x`
+outputs `P x`. The tactic `intro` also peels off `∀ x : X`
+in a goal.
 -/
 
-section Forall
+variable {P Q : X → Prop}
 
-variable {X : Type u} {A : X → Type v} {P Q : X → Prop}
-
-theorem specialize (h : ∀ x : X, P x) (x : X) : P x :=
-  h x
-
-def pointwise_application (f : ∀ x : X, A x) (x : X) : A x :=
-  f x
-
-theorem pointwise_implication
-    (hPQ : ∀ x : X, P x → Q x) :
+theorem pointwise_implication (h1 : ∀ x : X, P x → Q x) :
     (∀ x : X, P x) → ∀ x : X, Q x := by
-  intro hP x
-  exact hPQ x (hP x)
+  intro h2 x
+  apply h1 x
+  exact h2 x
 
-end Forall
 
-/-!
-## 5. What to remember
-
-For everyday Lean, the essential mental model is:
-
-* proving a statement means constructing a term of a type;
-* proving an implication means defining a function;
-* using an implication means applying a function;
-* universal quantification is a dependent version of the same idea.
-
-In short: theorem proving in Lean is largely function building.
-
-## Suggested exercises
-
-These are good next statements to try filling in by hand.
-
+/-
+Exercises
 -/
 
-variable {X : Type} {P Q R : Prop}
+namespace LeMa
 
-theorem imp_self : P → P := by
+variable {P Q R : Prop}
+
+example (h : P → Q → R) : P → (P → Q) → R := by
   sorry
 
-theorem imp_chain : (P → Q) → (Q → R) → P → R := by
+-- Prove that P ∧ ¬P implies False
+example : P → ¬ P → False := by
   sorry
 
-theorem imp_permute : (P → Q → R) → Q → P → R := by
+-- Try to prove the following and see what breaks.
+-- Then modify the statement slightly and prove the result.
+example (h : P → Q) (np : ¬ P) : ¬ Q → False := by
   sorry
-
-theorem pointwise_comp
-    {P Q R : X → Prop}
-    (hPQ : ∀ x, P x → Q x) (hQR : ∀ x, Q x → R x) :
-    ∀ x, P x → R x := by
-  sorry
-
 
 
 end LeMa
