@@ -70,6 +70,14 @@ example (a b : ℤ) : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b := by
     rw [mul_comm b a, ← two_mul]
 
 
+/-
+Tactic : `ring`
+If you find yourself getting frustrated by having to explicitly invoke
+commutativity, associativity, etc, try the `ring` tactic, which can
+close many "trivial" algebra goals automatically.
+-/
+
+example (a b : ℤ) : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b := by ring
 
 /-
 Try proving the following using these tactics.

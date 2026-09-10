@@ -183,3 +183,9 @@ example : (P ∨ Q ∨ R) ↔ ((P ∨ Q) ∨ R) := by
 open Classical in
 example (P : Prop) : ¬¬ (P ∨ ¬ P) := by
   sorry
+
+-- This one is hard. You'll need to use the tactic
+-- `exfalso` at a key point in the proof. This will
+-- change the goal to `False`.
+example : ¬¬ (¬¬ P → P) := by
+  sorry

@@ -3,39 +3,62 @@ import Mathlib.Data.Int.ModEq
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
-set_option linter.style.emptyLine false
-set_option linter.style.whitespace false
-
-/- Proof by cases in Lean is often handled with `by_cases` when the cases are
-described by a proposition, or with `cases` after first producing an explicit
-disjunction. -/
+/-
+Tactic : `by_cases h : P`
+Proof by cases in Lean is often handled with `by_cases`, which splits
+the main goal into two subgoals corresponding to the assumptions
+`h : P` in the first branch and `h : ¬ P` in the second branch. -/
 
 example (P Q : Prop) (hP : P → Q) (hNotP : ¬ P → Q) : Q := by
   by_cases hp : P
   · exact hP hp
   · exact hNotP hp
 
-/-- We'll reuse the parity facts `even ↔ ¬ odd` and `odd ↔ ¬ even`. -/
-theorem even_iff_not_odd (n : ℤ) : Even n ↔ ¬Odd n := Int.not_odd_iff_even.symm
-theorem odd_iff_not_even (n : ℤ) : Odd n ↔ ¬Even n := Int.not_even_iff_odd.symm
-
-def same_parity (x y : ℤ) : Prop := (Even x ∧ Even y) ∨ (Odd x ∧ Odd y)
-
 namespace Int.ModEq
 
-theorem dvd' {n a b : ℤ} (h : a ≡ b [ZMOD n]) : n ∣ a - b :=
-  h.symm.dvd
+/-
+Modular arithmetic is written using the syntax `a ≡ b [ZMod n]`.
+This is definitionally the same as `n ∣ b - a`, which is definitionally
+the same as `∃ k, b - a = n*k`. If we have a hypothesis of the form
+`h : a ≡ b [ZMod n]` then `h.dvd : n ∣ b - a`. From there you can
+use `obtain` to get `k`.
+
+If you'd prefer to work with the equivalent definition `n ∣ a - b`,
+here is an alternative called `dvd'`.
+-/
+
+theorem dvd' {n a b : ℤ} (h : a ≡ b [ZMOD n]) : n ∣ a - b := h.symm.dvd
+
+/-
+Tactic : `norm_num`
+This is basically a calculator tactic that can check basic arithmetic
+with acutal numbers.
+-/
+
+example : 7 ≡ 3 [ZMOD 2] := by
+  rw [modEq_iff_dvd]
+  norm_num
 
 end Int.ModEq
 
-/- Introductory examples with parity. The tactic `mod_cases` splits an integer
-into its possible congruence classes modulo a positive numeral. -/
+open Int
 
-theorem even_sq_add_self (x : ℤ) : Even (x ^ 2 + x) := by
+/-
+Tactic : `mod_cases`
+This splits an integer  into its possible congruence classes modulo a positive number.
+-/
+
+example (x : ℤ) : Even (x ^ 2 + x) := by
   mod_cases hx : x % 2
   · obtain ⟨k, hk⟩ := hx.dvd'
-    have hx' : x = 2 * k := by linarith
-    rw [hx']
+    /-
+    At this point we have the somewhat frustrating statement `hk : x - 0 = 2 * k`.
+    To simplify this, write `simp at hk`. Since `simp` is an expensive tactic,
+    replace it by `simp? at hk` and click the suggestion in the sidebar.
+    In this case it replaces `simp at hk` with `simp only [sub_zero] at hk`.
+    -/
+    simp only [sub_zero] at hk
+    rw [hk]
     use 2 * k ^ 2 + k
     ring
   · obtain ⟨k, hk⟩ := hx.dvd'
@@ -44,8 +67,16 @@ theorem even_sq_add_self (x : ℤ) : Even (x ^ 2 + x) := by
     use 2 * k ^ 2 + 3 * k + 1
     ring
 
-theorem same_parity_of_even_add {x y : ℤ}
-  (h : Even (x + y)) : same_parity x y := by
+/-
+Tactic : `linarith`
+Above, we used the tactic `linarith` to solve a trivial goal. This
+tactic is good at doing linear arithmetic with equalities and inequalities,
+and it uses the entire context when doing these simplifications.
+-/
+
+def same_parity (x y : ℤ) : Prop := (Even x ∧ Even y) ∨ (Odd x ∧ Odd y)
+
+example {x y : ℤ} (h : Even (x + y)) : same_parity x y := by
   mod_cases hx : x % 2
   · mod_cases hy : y % 2
     · obtain ⟨kx, hkx⟩ := hx.dvd'
@@ -66,7 +97,7 @@ theorem same_parity_of_even_add {x y : ℤ}
         use ky
         linarith
       have hxy : Odd (x + y) := hx_even.add_odd hy_odd
-      rw [odd_iff_not_even] at hxy
+      rw [← not_even_iff_odd] at hxy
       exact hxy h
   · mod_cases hy : y % 2
     · exfalso
@@ -79,7 +110,7 @@ theorem same_parity_of_even_add {x y : ℤ}
         use ky
         linarith
       have hxy : Odd (x + y) := hx_odd.add_even hy_even
-      rw [odd_iff_not_even] at hxy
+      rw [← not_even_iff_odd] at hxy
       exact hxy h
     · obtain ⟨kx, hkx⟩ := hx.dvd'
       obtain ⟨ky, hky⟩ := hy.dvd'
@@ -90,15 +121,8 @@ theorem same_parity_of_even_add {x y : ℤ}
       · use ky
         linarith
 
-/- Congruence modulo `n`. Lean writes this as `a ≡ b [ZMOD n]` for `a b : ℤ`
-and `a ≡ b [MOD n]` for `a b : ℕ`. -/
-
-example : 7 ≡ 3 [ZMOD 2] := by
-  rw [Int.modEq_iff_dvd]
-  norm_num
-
-theorem modEq_mul_right {a b c n : ℤ} (h : a ≡ b [ZMOD n]) : a * c ≡ b * c [ZMOD n] := by
-  rw [Int.modEq_iff_dvd] at h ⊢
+example {a b c n : ℤ} (h : a ≡ b [ZMOD n]) : a * c ≡ b * c [ZMOD n] := by
+  rw [modEq_iff_dvd] at h ⊢
   obtain ⟨k, hk⟩ := h
   use k * c
   calc
@@ -106,24 +130,24 @@ theorem modEq_mul_right {a b c n : ℤ} (h : a ≡ b [ZMOD n]) : a * c ≡ b * c
     _ = (n * k) * c := by rw [hk]
     _ = n * (k * c) := by ring
 
-theorem cube_mod_three (x : ℤ) : x ^ 3 ≡ x [ZMOD 3] := by
+example (x : ℤ) : x ^ 3 ≡ x [ZMOD 3] := by
   mod_cases hx : x % 3
   · obtain ⟨k, hk⟩ := hx.dvd'
     have hx' : x = 3 * k := by linarith
     rw [hx']
-    rw [Int.modEq_comm, Int.modEq_iff_dvd]
+    rw [modEq_comm, modEq_iff_dvd]
     use 9 * k ^ 3 - k
     ring
   · obtain ⟨k, hk⟩ := hx.dvd'
     have hx' : x = 3 * k + 1 := by linarith
     rw [hx']
-    rw [Int.modEq_comm, Int.modEq_iff_dvd]
+    rw [modEq_comm, modEq_iff_dvd]
     use 9 * k ^ 3 + 9 * k ^ 2 + 2 * k
     ring
   · obtain ⟨k, hk⟩ := hx.dvd'
     have hx' : x = 3 * k + 2 := by linarith
     rw [hx']
-    rw [Int.modEq_comm, Int.modEq_iff_dvd]
+    rw [modEq_comm, modEq_iff_dvd]
     use 9 * k ^ 3 + 18 * k ^ 2 + 11 * k + 2
     ring
 

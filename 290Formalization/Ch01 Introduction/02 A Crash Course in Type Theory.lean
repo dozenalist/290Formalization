@@ -21,8 +21,10 @@ The next example does the following: Given a function f : X → Y,
 and a term x of type X, construct a term of type Y.
 
 Of course the solution is that f(x) has type Y, so that's what we write.
-If you can exactly construct the term it's looking for, use the tactic `exact`.
 Function application is written `f x` instead of `f(x)`
+
+Tactic : `exact`
+If you can exactly construct the term it's looking for, use the tactic `exact`.
 -/
 
 example (f : X → Y) (x : X) : Y := by
@@ -170,9 +172,19 @@ Exercises
 
 namespace LeMa
 
-variable {P Q R : Prop}
+variable {P Q R : Prop} {X : Type}
 
 example (h : P → Q → R) : P → (P → Q) → R := by
+  sorry
+
+example : ((((P → Q) → P) → P) → Q) → Q := by
+  sorry
+
+-- For the next two exercises, give two different answers.
+def projFirst : X → X → X := by
+  sorry
+
+def projSecond : X → X → X := by
   sorry
 
 -- Prove that P ∧ ¬P implies False

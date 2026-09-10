@@ -21,22 +21,37 @@ theorem imp_iff_contrapositive (P Q : Prop) : (P → Q) ↔ (¬Q → ¬P) := by
       exfalso -- `exfalso` is a tactic that changes the goal to `False`
       apply h hnq p
 
-/-- We'll need the fact `even ↔ ¬ odd`, which we'll borrow from Mathlib, for several proofs. -/
-theorem even_iff_not_odd (n : ℤ) : Even n ↔ ¬Odd n := Int.not_odd_iff_even.symm
-theorem odd_iff_not_even (n : ℤ) : Odd n ↔ ¬Even n := Int.not_even_iff_odd.symm
+/-
+Tactic : `contrapose` and `contrapose!`
+`contrapose` transforms the main goal into its contrapositive.
+If the goal has the form `⊢ P → Q`, then `contrapose` turns it into `⊢ ¬ Q → ¬ P`.
+If the goal has the form `⊢ P ↔ Q`, then `contrapose` turns it into `⊢ ¬ P ↔ ¬ Q`.
+
+If you have a hypothesis `h : P` and your goal is `⊢ Q`, then `contrapose h` will
+turn `h` into `h : ¬ Q` and the goal into `⊢ ¬ P`.
+
+`contrapose!` will push the negation deeper into the goal after contraposing, using
+e.g. DeMorgan's laws.
+-/
+
+open Int
+
+-- The following theorems from Mathlib will be helpful
+#check not_odd_iff_even
+#check not_even_iff_odd
 
 example {x : ℤ} (h : Even (3 * x - 7)) : Odd x := by
-  contrapose! h
-  rw [← even_iff_not_odd] at h
-  rw [← odd_iff_not_even]
+  contrapose h
+  rw [Int.not_odd_iff_even] at h -- `at h` performs the rewrite at the hypothesis `h`
+  rw [Int.not_even_iff_odd]
   obtain ⟨k, rfl⟩ := h
   use (3*k - 4)
   ring
 
 example {x : ℤ} (h : Odd (x ^ 2 - 6 * x + 7)) : Even x := by
-  contrapose! h
-  rw [← odd_iff_not_even] at h
-  rw [← even_iff_not_odd]
+  contrapose h
+  rw [not_even_iff_odd] at h
+  rw [not_odd_iff_even]
   obtain ⟨k, rfl⟩ := h
   use (2*k^2 - 4 * k + 1)
   ring
@@ -62,7 +77,7 @@ theorem dvd_of_dvd_mul_add {a b c x y : Int}
 
 example {x : ℤ} (h : ¬ (2 ∣ x)) : Odd x := by
   contrapose! h
-  rw [← even_iff_not_odd] at h
+  rw [not_odd_iff_even] at h
   obtain ⟨k, rfl⟩ := h
   use k
   ring
@@ -73,7 +88,7 @@ theorem sq_odd_iff_odd (n : ℤ) : Odd (n ^ 2) ↔ Odd n := by
   constructor
   · intro h
     contrapose! h
-    rw [← even_iff_not_odd] at *
+    rw [not_odd_iff_even] at *
     obtain ⟨k, rfl⟩ := h
     use 2*k^2
     ring
