@@ -12,11 +12,11 @@ namespace LeMa
 A proof of `P ∧ Q` consists of a proof of `P` and a proof of `Q`.
 
 Tactic : `constructor`
-If And is in a goal, `constructor` produces two subgoals.
+If `And` is in a goal, `constructor` produces two subgoals.
 If you have multiple goals, use the center dot · to focus on one
 goal at a time.
 
-If And is in a hypothesis `h : P ∧ Q`, use `h.left` and `h.right`
+If `And` is in a hypothesis `h : P ∧ Q`, use `h.left` and `h.right`
 to get `P` and `Q` on their own.
 -/
 

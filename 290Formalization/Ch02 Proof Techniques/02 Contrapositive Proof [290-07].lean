@@ -41,19 +41,19 @@ example {x : ℤ} (h : Odd (x ^ 2 - 6 * x + 7)) : Even x := by
   use (2*k^2 - 4 * k + 1)
   ring
 
-example {a b : Int} (h : a ∣ b) : a ∣ 2 * b := by
+example {a b : ℤ} (h : a ∣ b) : a ∣ 2 * b := by
   obtain ⟨k, rfl⟩ := h
   use (2 * k)
   ring
 
-theorem dvd_transitive {a b c : Int}
+theorem dvd_transitive {a b c : ℤ}
   (hab : a ∣ b) (hbc : b ∣ c) : a ∣ c := by
   obtain ⟨k, rfl⟩ := hab
   obtain ⟨j, rfl⟩ := hbc
   use (j * k)
   ring
 
-theorem dvd_of_dvd_mul_add {a b c x y : Int}
+theorem dvd_of_dvd_mul_add {a b c x y : ℤ}
   (hab : a ∣ b) (hac : a ∣ c) : a ∣ (b * x + c * y) := by
   obtain ⟨k, rfl⟩ := hab
   obtain ⟨j, rfl⟩ := hac
@@ -98,7 +98,7 @@ example (s : ℤ) : Odd s ↔ Odd (s ^ 3) := by
   sorry
 
 -- Exercise 7.5 If a | c and b | d then ab | cd
-example {a b c d : Int} (hac : a ∣ c) (hbd : b ∣ d) :
+example {a b c d : ℤ} (hac : a ∣ c) (hbd : b ∣ d) :
   (a * b) ∣ (c * d) := by
   sorry
 
