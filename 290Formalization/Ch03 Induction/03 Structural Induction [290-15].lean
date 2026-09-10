@@ -225,6 +225,18 @@ theorem CityPath_valid {cities : Type}
     valid := sorry
 
 
-/-
-To-do: exercises
--/
+
+
+
+--Exercise 15.3
+theorem nugget_3_8_exists (n : ℕ) (hn : n ≥ 14) : ∃ x y : ℤ, n = 3 * x + 8 * y := sorry
+
+--Exercise 15.4
+theorem exists_pow_two_mul_odd (n : ℕ) : ∃ e m : ℕ, Odd m ∧ n = 2 ^ e * m := sorry
+
+-- Exercise 15.5
+theorem nugget_6_9_20_exists (n : ℕ) (hn : n ≥ 14) :
+    ∃ x y z : ℤ, n = 6 * x + 9 * y + 20 * z := sorry
+
+-- Exercise 15.7
+theorem exists_sum_fib (n : ℕ) : ∃ s : Finset ℕ, n = ∑ i ∈ s, Nat.fib i := sorry

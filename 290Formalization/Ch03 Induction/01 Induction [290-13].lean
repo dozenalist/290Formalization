@@ -80,10 +80,7 @@ theorem two_pow_gt_self (n : ℕ) : 2 ^ n > n := by
           rw [show (n + 1) * 2 = (n + 1) + (n + 1) by ring]
           exact Nat.lt_add_of_pos_right (Nat.succ_pos n)
 
-/-
-To-do:
-Add Proposition 13.11: any finite nonempty subset of real numbers has a least element.
--/
+
 
 /- Exercises -/
 
