@@ -1,7 +1,24 @@
 import Mathlib.Tactic
 import Mathlib.Data.List.Basic
 
--- Chicken Nugget Problem
+/-
+This section introduces structural induction, which is a generalization
+of induction to arbitrary inductive types. We give two examples of this
+here (natural numbers and lists) but it can be used quite generally.
+
+The main takeaway is that a proof using structural induction usually
+ends up looking almost indistinguishable from a recursively defined function.
+Use `match` to pattern match on the constructors of the inductive type
+(for natural numbers, these are `zero` and `succ`, but you can more generally
+pattern match on more cases if that's convenient.)
+-/
+
+/-
+The Chicken Nugget Problem
+The classic chicken nugget problem asks how many chicken nuggets one can
+buy if nuggets come in 6-piece, 9-piece, and 20-piece. Here we do the
+easier problem with 5 and 7, and the 6, 9, 20 case is an exercise.
+-/
 
 theorem nugget_5_7_exists (n : ℕ) (h : n ≥ 24) : ∃ x y : ℕ, n = 5*x + 7*y := by
   match n with
@@ -11,9 +28,15 @@ theorem nugget_5_7_exists (n : ℕ) (h : n ≥ 24) : ∃ x y : ℕ, n = 5*x + 7*
   | 27 => use 4, 1
   | 28 => use 0, 4
   | n + 29 =>
-    obtain ⟨x, y, hxy⟩ := nugget_5_7_exists (n + 24) (by linarith)
+    obtain ⟨x, y, hxy⟩ := nugget_5_7_exists (n + 24) (by linarith) -- IH looks like a recursive call
     use (x+1), y
     grind
+
+/-
+The following function returns an ordered pair (x,y) such that 5x+7y = n.
+Observe how closely the function definition resembles the proof of the
+theorem above.
+-/
 
 def nugget_5_7_construct : ℕ → ℕ × ℕ
   | 24 => ⟨2, 2⟩
@@ -28,6 +51,11 @@ def nugget_5_7_construct : ℕ → ℕ × ℕ
 
 #eval nugget_5_7_construct 34
 
+/-
+Prove that the output of `nugget_5_7_construct` is a valid solution
+to the 5,7 chicken nugget problem.
+-/
+
 theorem nugget_5_7_construct_valid (n : ℕ) (h : n ≥ 24) :
   n = 5*(nugget_5_7_construct n).1 + 7*(nugget_5_7_construct n).2 := by
   match n with
@@ -41,7 +69,19 @@ theorem nugget_5_7_construct_valid (n : ℕ) (h : n ≥ 24) :
     simp only [nugget_5_7_construct]
     linarith
 
--- System of One-Way Roads
+/-
+System of One-Way Roads
+From [290] Section 15:
+Let S be a finite set of cities. We will call a collection of one-way roads,
+with a single road connecting each pair of distinct cities in S, a system of
+one-way roads for S. If there is some path through the cities that follows
+the system of one-way roads and visits each city exactly once, we will call
+it a valid path through the cities.
+
+The following structure defines a system of one-way roads. The example
+below it matches the 5-city example in [290].
+-/
+
 
 structure Roads (cities : Type) where
   R : cities → cities → ℤ
@@ -78,18 +118,26 @@ def FiveCitiesRoads : Roads FiveCities where
 
 open List
 
+/-
+The following structure encodes the definition of a valid path.
+Given a list of cities L, a valid path is a permutation of L
+such that the i-th element of L is connected to the (i+1)-th
+element of L for each i.
+-/
+
 structure ValidPath {cities : Type} (S : Roads cities)
   (L : List cities) (hL : Nodup L) (path : List cities) :
   Prop where
   cover : L ~ path -- this means L is a permuatation of path
   valid : path.IsChain (fun x y => S.R x y > 0)
 
--- Let's show that the path [B, A, C, E, D] is valid
+-- Verify that the path [B, A, C, E, D] is valid
 def FiveCitiesPath : ValidPath FiveCitiesRoads [A, B, C, D, E]
   (by decide) [B, A, C, E, D] where
   cover := by decide
   valid := by decide
 
+-- Prove that there always exists a valid path
 theorem ExistsValidPath {cities : Type} (S : Roads cities)
   (L : List cities) (hL : Nodup L) :
   ∃ path : List cities, ValidPath S L hL path := by
@@ -175,3 +223,8 @@ theorem CityPath_valid {cities : Type}
   ValidPath S L hL (CityPath S L) where
     cover := sorry
     valid := sorry
+
+
+/-
+To-do: exercises
+-/

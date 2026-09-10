@@ -2,7 +2,38 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Finset.Powerset
 import Mathlib.Data.Finset.Lattice.Basic
 import Mathlib.Tactic
--- import Mathlib.Data.Nat.Factorial.Basic
+
+/-
+Tactic : `induction ... using ...`
+A variant of the standard induction tactic is
+`Nat.le_induction`, which starts at a nonzero base case.
+You'll need to pass it a hypothesis `h : n ≥ n₀` so it
+knows where to begin.
+
+The proof of the following theorem uses a new tactic
+called `gcongr`. To introduce this, we'll first discuss `congr`.
+-/
+
+/-
+Tactic : `congr`
+If your goal is to prove something of the form a + b = c + d,
+it suffices to prove that a = c and b = d. The `congr` tactic breaks
+your goal into these smaller subgoals. However, these subgoals
+might not be provable (`congr` is an "unsafe" tactic) so you should
+only use it when you're sure it'll help.
+
+From the documentation for `congr`:
+Apply congruence (recursively) to goals of the form ⊢ f as = f bs and ⊢ f as ≍ f bs.
+The optional parameter is the depth of the recursive applications.
+This is useful when `congr` is too aggressive in breaking down the goal.
+For example, given ⊢ f (g (x + y)) = f (g (y + x)), `congr` produces the goals ⊢ x = y and ⊢ y = x,
+while `congr 2` produces the intended ⊢ x + y = y + x.
+
+Tactic : `gcongr`
+This tactic works like `congr` but for generalized congruence rules
+involving, e.g. inequalities instead of equalities.
+To prove x^2 + a ≥ x^2 + b, it suffices to prove that a ≥ b.
+-/
 
 theorem two_pow_gt_cube {n : ℕ} (h : n ≥ 10) : 2^n > n^3 := by
   induction n, h using Nat.le_induction with
@@ -18,6 +49,14 @@ theorem two_pow_gt_cube {n : ℕ} (h : n ≥ 10) : 2^n > n^3 := by
       _ ≥ n^3 + 3*n^2 + 3*n + 1 := by gcongr; linarith
       _ = (n+1)^3 := by ring
 
+/-
+Tactic : `simp only`
+If you're trying to prove something "obvious", try `simp`; it might surprise you.
+However, if `simp` does work as you want it to, temporarily replace it with
+`simp?` and click the suggestion in the right sidebar. This will replace the line with
+something of the form `simp only [...]` which compiles much faster.
+-/
+
 theorem fac_gt_two_pow {n : ℕ} (h : n ≥ 4) : n.factorial > 2^n := by
   induction n, h using Nat.le_induction with
   | base => norm_num
@@ -26,6 +65,15 @@ theorem fac_gt_two_pow {n : ℕ} (h : n ≥ 4) : n.factorial > 2^n := by
       _ > (n+1)*2^n := by gcongr
       _ > 2*2^n := by gcongr; linarith
       _ = 2^(n+1) := by ring
+
+/-
+The next theorem computes the cardinality of the powerset.
+This is already in mathlib under the name `Finset.card_powerset`.
+Here's a proof that matches the one given in [290]. It uses
+induction on `Finset`: prove the statement for the empty set,
+then prove it for a set of the form `insert a s` where `s`
+is a set and `a` is a new element not in `s`.
+-/
 
 #check Finset.card_powerset
 
@@ -56,7 +104,19 @@ theorem Finset.card_powerset' {α : Type} (s : Finset α) :
         H, card_insert_of_notMem ha]
       grind
 
--- Multiple base cases
+/-
+Here is a straightforward example where we have
+multiple base cases.
+-/
+
+/-
+Tactic : `interval_cases n`
+Search for upper and lower bounds on n (e.g. `n: ℕ` is a lower bound)
+and split into cases.
+
+Tactic : `tac₁ <;> tac₂`
+Runs `tac₁` on the main goal, followed by `tac₂` on each produced goal.
+-/
 
 theorem two_pow_gt_square (n : ℕ) : 2^(n+1) > n^2 := by
   by_cases h : n < 3
@@ -72,3 +132,8 @@ theorem two_pow_gt_square (n : ℕ) : 2^(n+1) > n^2 := by
         _ = n^2 + 2*n + n := by ring
         _ ≥ n^2 + 2*n + 1 := by gcongr; linarith
         _ = (n + 1) ^ 2 := by ring
+
+
+/-
+To-do: exercises
+-/
