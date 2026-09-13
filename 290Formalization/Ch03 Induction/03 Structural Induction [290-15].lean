@@ -240,5 +240,3 @@ theorem nugget_6_9_20_exists (n : ℕ) (hn : n ≥ 14) :
 
 -- Exercise 15.7
 theorem exists_sum_fib (n : ℕ) : ∃ s : Finset ℕ, n = ∑ i ∈ s, Nat.fib i := sorry
-
-#check Quotient
