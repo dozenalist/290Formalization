@@ -47,11 +47,11 @@ def sameLength : RelationOn String := fun s t => s.length = t.length
 
 example : sameLength "tree" "yaks" := by
   unfold sameLength
-  native_decide
+  decide
 
 example : ¬ sameLength "awesome" "gum" := by
   unfold sameLength
-  native_decide
+  decide
 
 def membershipRelation : RelationFrom ℕ (Set ℕ) := fun a X => a ∈ X
 
