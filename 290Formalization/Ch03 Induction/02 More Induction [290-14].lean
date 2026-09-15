@@ -134,6 +134,33 @@ theorem two_pow_gt_square (n : ℕ) : 2^(n+1) > n^2 := by
         _ = (n + 1) ^ 2 := by ring
 
 
-/-
-To-do: exercises
--/
+open Nat Finset
+
+-- Exercise 14.1
+theorem three_pow_lt_factorial (n : ℕ) (hn : n ≥ 7) : 3 ^ n < (n)! := by
+  sorry
+
+-- Exercise 14.2
+theorem pow_three_lt_factorial (n : ℕ) (hn : n ≥ 6) : n ^ 3 < (n)! := by
+  sorry
+
+-- Exercise 14.3
+theorem pow_three_le_three_pow (n : ℕ) : n ^ 3 ≤ 3 ^ n := by
+  sorry
+
+-- Exercise 14.5
+-- Hint: use `abs_add_le`
+theorem Finset.abs_sum_le (s : Finset ℝ) : |∑ x ∈ s, x| ≤ ∑ x ∈ s, |x| := by
+  sorry
+
+--Exercise 14.5
+theorem sum_fib (n : ℕ) : ∑ i ∈ range n, fib i = fib (n + 1) - 1 := by
+  sorry
+
+--Exercise 14.6
+theorem sum_sq_fib (n : ℕ) : ∑ i ∈ range (n + 1), fib i ^ 2 = fib n * fib (n + 1) := by
+  sorry
+
+-- Exercise 14.7
+theorem sq_le_fib (n : ℕ) (hn : n ≥ 13) : n ^ 2 ≤ fib n := by
+  sorry

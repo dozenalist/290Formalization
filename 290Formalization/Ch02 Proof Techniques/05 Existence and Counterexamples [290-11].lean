@@ -91,12 +91,6 @@ theorem no_real_sq_lt_neg_one : ¬ ∃ x : ℝ, x ^ 2 < -1 := by
   linarith
 
 
-/-
-Tactic: `ring`
-`ring` proves equalities that can be derived from the ring axioms.
-It also works for algebraic structures other than rings, including ℕ
--/
-
 theorem exists_dvd_dvd_ne : ∃ a b : ℤ, a ∣ b ∧ b ∣ a ∧ a ≠ b := by
   refine ⟨2, -2, ?_⟩
   constructor

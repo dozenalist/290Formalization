@@ -189,3 +189,7 @@ example (P : Prop) : ¬¬ (P ∨ ¬ P) := by
 -- change the goal to `False`.
 example : ¬¬ (¬¬ P → P) := by
   sorry
+
+
+
+end LeMa

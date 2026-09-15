@@ -94,7 +94,6 @@ The following is short for fun a b => a < b -/
 
 
 -- Exercise 20.3
-
 theorem not_refl_mul_lt_zero : ¬ Reflexive (· * · < (0 : ℝ)) := by
   sorry
 
@@ -135,7 +134,7 @@ theorem trans_even_sub : Transitive (fun x y : ℤ => Even (x - y)) := by
 theorem not_antisymm_even_sub : ¬ AntiSymmetric (fun x y : ℤ => Even (x - y)) := by
   sorry
 
-theorem even_one_sub_of_odd (n : ℤ) (hn : Odd n) : (fun x y : ℤ => Even (x - y)) 1 n := by
+theorem even_one_sub_iff_odd (n : ℤ) : Odd n ↔ (fun x y : ℤ => Even (x - y)) 1 n := by
   sorry
 
 
